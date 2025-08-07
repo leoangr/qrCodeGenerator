@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="shortcut icon" href="https://leoanggoro.my.id/images/favicon-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="tagline">Generate Your Own <span>QR Code</span> Here</h1>
+        <div class="out-box-data">
+            <div class="box-data">
+                <section class="type-value-qr">
+                    <h4 class="sub-tagline">Type</h4>
+                    <div class="list-type-value-qr">
+                        <button type="button" class="active">
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.5217 13.4798C11.2884 14.2466 12.3286 14.6779 13.4135 14.6788C13.7721 14.6738 14.1291 14.6281 14.4774 14.5426C15.1679 14.3509 15.7974 13.9849 16.3052 13.4798L17.2737 12.5125L20.1517 9.62398C20.8746 8.84914 21.2681 7.82429 21.2494 6.76536C21.2307 5.70643 20.8012 4.69609 20.0515 3.94719C19.3017 3.1983 18.2903 2.76932 17.2301 2.75064C16.17 2.73195 15.144 3.12502 14.3683 3.84703L11.4902 6.73551"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M12.4449 17.3357L9.55321 20.2241C8.77213 20.9143 7.75675 21.2805 6.71446 21.248C5.67216 21.2155 4.68161 20.7868 3.94511 20.0494C3.20861 19.312 2.78174 18.3215 2.75169 17.2803C2.72163 16.2391 3.09066 15.2258 3.7834 14.4472L6.67512 11.5587L7.64358 10.5913C8.1514 10.0862 8.78087 9.72024 9.47137 9.52861C10.1661 9.34294 10.8975 9.34342 11.5919 9.52999C12.2864 9.71656 12.9193 10.0826 13.427 10.5913"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            Url
+                        </button>
+                        <button type="button">
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M21.25 7.50616V14.1133C21.25 14.6339 21.1475 15.1494 20.9482 15.6304C20.749 16.1113 20.457 16.5484 20.0889 16.9165C19.7208 17.2846 19.2837 17.5766 18.8028 17.7758C18.3218 17.975 17.8063 18.0776 17.2857 18.0776H14.6429L12.4625 20.2579C12.4032 20.3211 12.3315 20.3715 12.252 20.406C12.1724 20.4404 12.0867 20.4582 12 20.4582C11.9133 20.4582 11.8276 20.4404 11.748 20.406C11.6685 20.3715 11.5968 20.3211 11.5375 20.2579L9.35714 18.0776H6.71429C5.66289 18.0776 4.65456 17.6599 3.91111 16.9165C3.16766 16.173 2.75 15.1647 2.75 14.1133V7.50616C2.75 6.45476 3.16766 5.44643 3.91111 4.70298C4.65456 3.95953 5.66289 3.54187 6.71429 3.54187H17.2857C18.3371 3.54187 19.3454 3.95953 20.0889 4.70298C20.8323 5.44643 21.25 6.45476 21.25 7.50616Z"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            Text
+                        </button>
+                    </div>
+                </section>
+                <section class="box-generate-qr">
+                    <div class="card-inp-qr-value">
+                        <h4 class="sub-tagline" id="sub-tagline-input">Enter Your URL</h4>
+                        <div id="box-inp">
+                            <input type="url" placeholder="Url ..." id="QrValue">
+                        </div>
+                    </div>
+                    <button type="button" onclick="generateQR()">Generate</button>
+                </section>
+            </div>
+            <div class="out-qr-box-image">
+                <div class="box-qr-image">
+                    <div id="loading-qr"></div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=halo" id="qrImage">
+                </div>
+                <button type="button" id="downloadQR">Download QR Code</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const buttonType = document.querySelectorAll('.list-type-value-qr button');
+        let typeButton = 'url';
+        const inputBox = document.getElementById('box-inp');
+        const taglineInfo = document.getElementById('sub-tagline-input');
+
+        buttonType.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                buttonType.forEach((b) => b.classList.remove('active'));
+                btn.classList.add('active');
+                typeButton = btn.textContent.trim().toLowerCase();
+
+                let content = '';
+                let taglineData = '';
+                if (typeButton === 'text') {
+                    taglineData = 'Enter Your Text';
+                    content = `<textarea placeholder="Text ..." id="QrValue"></textarea>`;
+                } else {
+                    taglineData = 'Enter Your URL';
+                    content = `<input type="url" placeholder="URL ..." id="QrValue">`;
+                }
+
+                inputBox.innerHTML = content;
+                taglineInfo.textContent = taglineData;
+            });
+        });
+
+        const loading = document.getElementById('loading-qr');
+        const qrImage = document.getElementById('qrImage');
+        const downloadBtn = document.getElementById('downloadQR');
+
+        const generateQR = () => {
+            loading.style.display = 'block';
+
+            const qrInput = document.getElementById('QrValue');
+            const value = qrInput.value.trim();
+
+            if (!value) {
+                loading.style.display = 'none';
+                alert('Input tidak boleh kosong!');
+                return;
+            }
+
+            if (qrInput.type === 'url') {
+                try {
+                    new URL(value); // validasi URL
+                } catch {
+                    loading.style.display = 'none';
+                    alert('Masukkan URL yang valid!');
+                    return;
+                }
+            }
+
+            setTimeout(() => {
+
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(value)}`;
+                qrImage.src = qrUrl;
+
+                qrImage.onload = () => {
+                    loading.style.display = 'none';
+                    downloadBtn.href = qrImage.src;
+                };
+
+                qrImage.onerror = () => {
+                    loading.style.display = 'none';
+                    alert("Gagal memuat gambar QR");
+                };
+            }, 1000);
+        };
+
+        downloadBtn.addEventListener('click', async () => {
+
+            try {
+
+                const time = new Date();
+                let dataTime = time.getTime();
+                let formattedDateTime = `${time.getFullYear()}-${String(time.getMonth() + 1).padStart(2, '0')}-${String(time.getDate()).padStart(2, '0')} ${String(time.getHours()).padStart(2, '0')}:${String(time.getMinutes()).padStart(2, '0')}:${String(time.getSeconds())}`;
+
+                const response = await fetch(qrImage.src, { mode: 'cors' });
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+
+                const tempLink = document.createElement('a');
+                tempLink.href = url;
+                tempLink.download = `QrCode-${formattedDateTime}.png`;
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                document.body.removeChild(tempLink);
+
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                alert('Gagal mendownload QR code');
+                console.error(err);
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
