@@ -232,6 +232,14 @@ body {
     -webkit-filter: brightness(97%);
 }
 
+.copyright {
+    font-size: 13px;
+    color: rgba(128, 128, 128, 0.7);
+    font-family: var(--poppins-font);
+    margin-top: 5rem;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
 
     .out-box-data {
