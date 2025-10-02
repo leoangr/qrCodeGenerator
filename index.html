@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
+    <script type="module" src="script/index.js"></script>
     <link rel="shortcut icon" href="https://leoanggoro.my.id/icon-favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +63,7 @@
                             <input type="url" placeholder="Url ..." id="QrValue">
                         </div>
                     </div>
-                    <button type="button" onclick="generateQR()">Generate</button>
+                    <button type="button" id="generate-qr-code">Generate</button>
                 </section>
             </div>
             <div class="out-qr-box-image">
@@ -78,104 +79,6 @@
             <p class="copyright">&copy;leoanggoro.my.id</p>
         </footer>
     </div>
-
-    <script>
-        const buttonType = document.querySelectorAll('.list-type-value-qr button');
-        let typeButton = 'url';
-        const inputBox = document.getElementById('box-inp');
-        const taglineInfo = document.getElementById('sub-tagline-input');
-
-        buttonType.forEach((btn) => {
-            btn.addEventListener('click', () => {
-                buttonType.forEach((b) => b.classList.remove('active'));
-                btn.classList.add('active');
-                typeButton = btn.textContent.trim().toLowerCase();
-
-                let content = '';
-                let taglineData = '';
-                if (typeButton === 'text') {
-                    taglineData = 'Enter Your Text';
-                    content = `<textarea placeholder="Text ..." id="QrValue"></textarea>`;
-                } else {
-                    taglineData = 'Enter Your URL';
-                    content = `<input type="url" placeholder="URL ..." id="QrValue">`;
-                }
-
-                inputBox.innerHTML = content;
-                taglineInfo.textContent = taglineData;
-            });
-        });
-
-        const loading = document.getElementById('loading-qr');
-        const qrImage = document.getElementById('qrImage');
-        const downloadBtn = document.getElementById('downloadQR');
-
-        const generateQR = () => {
-            loading.style.display = 'block';
-
-            const qrInput = document.getElementById('QrValue');
-            const value = qrInput.value.trim();
-
-            if (!value) {
-                loading.style.display = 'none';
-                alert('Input tidak boleh kosong!');
-                return;
-            }
-
-            if (qrInput.type === 'url') {
-                try {
-                    new URL(value); // validasi URL
-                } catch {
-                    loading.style.display = 'none';
-                    alert('Masukkan URL yang valid!');
-                    return;
-                }
-            }
-
-            setTimeout(() => {
-
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(value)}`;
-                qrImage.src = qrUrl;
-
-                qrImage.onload = () => {
-                    loading.style.display = 'none';
-                    downloadBtn.href = qrImage.src;
-                };
-
-                qrImage.onerror = () => {
-                    loading.style.display = 'none';
-                    alert("Gagal memuat gambar QR");
-                };
-            }, 1000);
-        };
-
-        downloadBtn.addEventListener('click', async () => {
-
-            try {
-
-                const time = new Date();
-                let dataTime = time.getTime();
-                let formattedDateTime = `${time.getFullYear()}-${String(time.getMonth() + 1).padStart(2, '0')}-${String(time.getDate()).padStart(2, '0')} ${String(time.getHours()).padStart(2, '0')}:${String(time.getMinutes()).padStart(2, '0')}:${String(time.getSeconds())}`;
-
-                const response = await fetch(qrImage.src, { mode: 'cors' });
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-
-                const tempLink = document.createElement('a');
-                tempLink.href = url;
-                tempLink.download = `QrCode-${formattedDateTime}.png`;
-                document.body.appendChild(tempLink);
-                tempLink.click();
-                document.body.removeChild(tempLink);
-
-                URL.revokeObjectURL(url);
-            } catch (err) {
-                alert('Gagal mendownload QR code');
-                console.error(err);
-            }
-        });
-
-    </script>
 
 </body>
 
